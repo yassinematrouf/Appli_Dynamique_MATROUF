@@ -18,11 +18,10 @@ export const UserList = () => {
         setUsers(data);
         setLoading(false);
       } catch (err) {
-        setError("Impossible de charger les utilisateurs");
+        setError("Impossible de charger les utilisateurs. Vérifiez votre connexion.");
         setLoading(false);
       }
     };
-
     getUsers();
   }, []);
 
