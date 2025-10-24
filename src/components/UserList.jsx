@@ -8,6 +8,8 @@ export const UserList = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
 
   useEffect(() => {
     const getUsers = async () => {
@@ -27,6 +29,7 @@ export const UserList = () => {
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
 
+  // Recherche
   const filteredUsers = users.filter(
     (user) =>
       user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -34,6 +37,7 @@ export const UserList = () => {
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Tri
   const sortedUsers = [...filteredUsers];
   if (sortOption === "name") {
     sortedUsers.sort((a, b) => a.firstName.localeCompare(b.firstName));
@@ -41,11 +45,20 @@ export const UserList = () => {
     sortedUsers.sort((a, b) => a.age - b.age);
   }
 
+  // Pagination
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+  const totalPages = Math.ceil(sortedUsers.length / usersPerPage);
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+
   return (
     <div>
       <h1>Liste des utilisateurs</h1>
 
-      {/* Champ de recherche */}
+      {/* Recherche */}
       <input
         type="text"
         placeholder="Rechercher par nom, prénom ou email..."
@@ -54,7 +67,7 @@ export const UserList = () => {
         style={{ marginBottom: "20px", padding: "8px", width: "60%" }}
       />
 
-      {/* Menu tri */}
+      {/* Tri */}
       <select
         value={sortOption}
         onChange={(e) => setSortOption(e.target.value)}
@@ -65,9 +78,31 @@ export const UserList = () => {
         <option value="age">Âge (croissant)</option>
       </select>
 
+      {/* Liste */}
       <div className="user-list">
-        {sortedUsers.map((user) => (
+        {currentUsers.map((user) => (
           <UserCard key={user.id} user={user} />
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div style={{ marginTop: "20px" }}>
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            style={{
+              margin: "0 5px",
+              padding: "5px 10px",
+              backgroundColor: number === currentPage ? "#007bff" : "#f0f0f0",
+              color: number === currentPage ? "#fff" : "#000",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            {number}
+          </button>
         ))}
       </div>
     </div>
