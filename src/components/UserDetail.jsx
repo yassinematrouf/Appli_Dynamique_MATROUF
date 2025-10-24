@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchUserById } from "../data/interactAPI";
+import { Spinner } from "./Spinner";
 
 export const UserDetail = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ export const UserDetail = () => {
     getUser();
   }, [id]);
 
-  if (loading) return <p>Chargement...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>{error}</p>;
 
   return (

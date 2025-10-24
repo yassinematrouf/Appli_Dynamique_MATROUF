@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchUsers } from "../data/interactAPI";
 import { UserCard } from "./UserCard";
+import { Spinner } from "./Spinner";
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -25,7 +26,7 @@ export const UserList = () => {
     getUsers();
   }, []);
 
-  if (loading) return <p>Chargement...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>{error}</p>;
 
   // Recherche
