@@ -1,0 +1,13 @@
+Travail effectué
+
+Création d'une application React from scratch
+
+Mise en place d'une structure propre avec des composants réutilisables
+
+Intégration d'une API externe pour récupérer les utilisateurs
+
+Gestion de la navigation avec React Router
+
+Gestion de l'état de chargement et des erreurs
+
+Versionnement du projet avec Git et push sur GitHub
