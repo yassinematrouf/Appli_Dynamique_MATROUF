@@ -6,7 +6,8 @@ export const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // état pour la recherche
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
   useEffect(() => {
     const getUsers = async () => {
@@ -26,13 +27,19 @@ export const UserList = () => {
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
 
-  // Filtrer les utilisateurs selon le champ de recherche
   const filteredUsers = users.filter(
     (user) =>
       user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const sortedUsers = [...filteredUsers];
+  if (sortOption === "name") {
+    sortedUsers.sort((a, b) => a.firstName.localeCompare(b.firstName));
+  } else if (sortOption === "age") {
+    sortedUsers.sort((a, b) => a.age - b.age);
+  }
 
   return (
     <div>
@@ -44,11 +51,22 @@ export const UserList = () => {
         placeholder="Rechercher par nom, prénom ou email..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: "20px", padding: "8px", width: "100%" }}
+        style={{ marginBottom: "20px", padding: "8px", width: "60%" }}
       />
 
+      {/* Menu tri */}
+      <select
+        value={sortOption}
+        onChange={(e) => setSortOption(e.target.value)}
+        style={{ marginBottom: "20px", padding: "8px", marginLeft: "10px" }}
+      >
+        <option value="">Trier par...</option>
+        <option value="name">Nom (A → Z)</option>
+        <option value="age">Âge (croissant)</option>
+      </select>
+
       <div className="user-list">
-        {filteredUsers.map((user) => (
+        {sortedUsers.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
       </div>
