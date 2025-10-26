@@ -1,13 +1,19 @@
 Travail effectué
 
-Création d'une application React from scratch
+Création du projet avec Vite et initialisation du dépôt GitHub.
 
-Mise en place d'une structure propre avec des composants réutilisables
+Mise en place de la structure de composants React (UserList, UserCard, UserDetail).
 
-Intégration d'une API externe pour récupérer les utilisateurs
+Intégration de l’API avec gestion des états loading et error.
 
-Gestion de la navigation avec React Router
+Implémentation d’une recherche et d’un tri dynamique.
 
-Gestion de l'état de chargement et des erreurs
+Ajout d’une pagination et d’un filtrage efficace.
 
-Versionnement du projet avec Git et push sur GitHub
+Mise en place du système de favoris (localStorage).
+
+Gestion d’un thème clair/sombre via React Context.
+
+Amélioration de l’expérience utilisateur (animations, transitions, interface claire).
+
+Optimisations avec useMemo pour éviter les rechargements inutiles.
