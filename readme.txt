@@ -1,70 +1,15 @@
-# Appli_Dynamique_MATROUF
+Appli Dynamique MATROUF
 
-## Description du projet
+Cette application React a été développée dans le but de créer une interface moderne et fluide pour afficher, rechercher et gérer des utilisateurs récupérés depuis une API externe (DummyJSON).
 
-Ce projet est une application React dynamique permettant de consulter une liste d'utilisateurs et de visualiser les détails de chaque utilisateur.  
-Les données sont récupérées depuis l'API publique : [https://dummyjson.com/users](https://dummyjson.com/users).  
+L’application permet d’afficher une liste complète d’utilisateurs avec leurs informations principales comme le nom, le prénom, l’email et la photo de profil. L’utilisateur peut effectuer une recherche dynamique grâce à une barre de recherche qui filtre les résultats en temps réel. Un système de tri permet de classer les utilisateurs par nom ou par âge à l’aide d’un menu déroulant.
 
-L'application est structurée en plusieurs composants réutilisables et utilise React Router pour gérer la navigation entre la liste et les fiches détaillées des utilisateurs.  
+Chaque utilisateur est affiché sous forme de carte (UserCard) avec des effets visuels au survol et la possibilité d’ajouter ou de retirer un utilisateur des favoris en cliquant sur une étoile. Ces favoris sont sauvegardés localement via le localStorage, permettant leur persistance même après le rechargement de la page.
 
----
+L’application intègre également un système de thème clair/sombre, géré par un contexte global (ThemeContext) accessible dans tout le projet. L’utilisateur peut ainsi basculer entre les deux modes grâce à un bouton dédié.
 
-## Fonctionnalités réalisées (Niveau 1)
+Des optimisations ont été ajoutées pour améliorer les performances et le confort d’utilisation. Le tri et le filtrage sont optimisés grâce au hook useMemo. Des effets de transition et des animations (hover, fade-in) rendent l’expérience plus agréable. Un composant de chargement visuel s’affiche lors de la récupération des données et un message d’erreur stylisé apparaît en cas de problème, avec la possibilité de relancer la requête.
 
-1. **Affichage de la liste des utilisateurs**  
-   - Récupération des données depuis l'API avec `fetch` et `useEffect`  
-   - Stockage des données dans l'état local avec `useState`  
-   - Affichage des informations principales : photo, prénom, nom et email  
+Enfin, l’organisation du code est structurée avec des composants réutilisables (UserCard, UserList), un hook personnalisé (useUsers) pour la gestion des données et un contexte global pour la gestion du thème.
 
-2. **Page détail d'un utilisateur**  
-   - Cliquer sur un utilisateur dans la liste ouvre sa fiche détaillée  
-   - Affichage des informations supplémentaires : âge, ville, université, entreprise  
-
-3. **Composants créés**  
-   - `UserList` : gère la récupération et l'affichage de la liste  
-   - `UserCard` : affiche les informations principales d'un utilisateur dans la liste  
-   - `UserDetail` : affiche toutes les informations détaillées d'un utilisateur  
-
-4. **Navigation avec React Router**  
-   - Route `/` → affiche la liste des utilisateurs (`UserList`)  
-   - Route `/user/:id` → affiche la fiche détaillée d'un utilisateur (`UserDetail`)  
-
-5. **Gestion de l'état de chargement et des erreurs**  
-   - Affichage de "Chargement..." pendant la récupération des données  
-   - Gestion des erreurs réseau avec un message d'erreur approprié  
-
-6. **Versionnement Git**  
-   - Le projet est versionné sur GitHub avec des commits réguliers  
-
----
-
-## Installation et utilisation
-
-1. Cloner le projet :
-
-```bash
-git clone https://github.com/yassinematrouf/Appli_Dynamique_MATROUF.git
-
-    Installer les dépendances :
-
-cd Appli_Dynamique_MATROUF
-npm install
-
-    Lancer le serveur de développement :
-
-npm run dev
-
-    Ouvrir le navigateur sur http://localhost:5173
-
-Architecture du projet
-
-src/
-├── components/
-│   ├── UserCard.jsx
-│   ├── UserList.jsx
-│   └── UserDetail.jsx
-├── data/
-│   └── interactAPI.js
-├── App.jsx
-├── main.jsx
-└── App.css
+Ce projet met en pratique les concepts fondamentaux de React comme les hooks, les états locaux, les effets, les contextes, la navigation avec React Router, ainsi que la gestion d’événements et d’interactions utilisateurs.
